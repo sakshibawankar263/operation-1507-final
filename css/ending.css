@@ -1,0 +1,334 @@
+#s-ending {
+  z-index: 4500;
+  background: #000;
+   align-items:flex-start !important;
+
+    justify-content:flex-start !important;
+
+    overflow-y:auto;
+
+    padding-top:70px;
+}
+#s-ending .ending-wrap{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:flex-start;
+
+    align-items:center;
+
+    flex-direction:column;
+
+}
+.ending-wrap{
+
+position:absolute;
+
+width:100%;
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:flex-start;
+
+align-items:center;
+
+flex-direction:column;
+
+padding:80px 0;
+
+overflow:visible;
+
+}
+.ending-particles-canvas{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100vw;
+height:100vh;
+
+pointer-events:none;
+
+z-index:1;
+
+}
+.glitch-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  animation: glitch-overlay-anim 0.5s ease-out forwards;
+}
+@keyframes glitch-overlay-anim {
+  0%   { background: repeating-linear-gradient(0deg, transparent 0%, rgba(0,184,255,0.08) 2%, transparent 4%); opacity: 1; }
+  50%  { background: repeating-linear-gradient(90deg, transparent 0%, rgba(155,92,246,0.08) 1%, transparent 2%); opacity: 0.6; }
+  100% { background: none; opacity: 0; }
+}
+.ending-content{
+
+position:relative;
+z-index:2;
+
+width:min(92%,900px);
+min-height:100vh;
+height:auto;
+display:grid;
+grid-template-rows:auto 1fr auto auto;
+
+justify-items:center;
+
+padding:2rem;
+
+row-gap:1.5rem;
+
+opacity:0;
+transition:.8s;
+
+}
+
+.ending-content.visible { opacity: 1; }
+
+.ending-line {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  color: var(--blue);
+  min-height: 1.2em;
+}
+.ending-line--lg {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 40px var(--blue-glow), 0 0 80px var(--purple-glow);
+}
+.ending-line--sub {
+  font-size: 0.85rem;
+  color: var(--muted-lt);
+  letter-spacing: 0.2em;
+  font-family: var(--font-mono);
+}
+.ending-divider {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+}
+.ending-msg::before{
+
+content:"TRANSMISSION";
+
+position:absolute;
+
+top:10px;
+
+left:18px;
+
+font-family:var(--font-mono);
+
+font-size:.62rem;
+
+letter-spacing:.25em;
+
+color:var(--blue);
+
+opacity:.7;
+
+}
+.ending-msg{
+
+width:100%;
+max-width:720px;
+
+max-height:42vh;
+
+overflow-y:auto;
+
+background:rgba(8,15,28,.92);
+
+border:1px solid rgba(0,184,255,.2);
+
+padding:28px;
+
+border-radius:10px;
+
+}
+.ending-msg__p{
+
+margin-top:22px;
+
+font-family:var(--font-mono);
+
+font-size:.95rem;
+
+line-height:2;
+
+white-space:pre-line;
+
+color:#dfefff;
+
+text-align:left;
+
+}
+.ending-signature {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--muted-lt);
+}
+.ending-restart { margin-top: 0.5rem; }
+
+/* ================================================================
+   BACKGROUND CANVAS (global)
+================================================================ */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+#ending-content{
+    opacity:0;
+    transition:.8s;
+}
+
+#ending-content.visible{
+    opacity:1;
+}
+
+.birthday-sign{
+
+font-family:var(--font-mono);
+
+font-size:.8rem;
+
+letter-spacing:.25em;
+
+color:var(--muted-lt);
+
+margin-top:10px;
+
+}
+
+.birthday-sign.visible{
+    opacity:1;
+}
+
+#btn-restart{
+    opacity:0;
+    pointer-events:none;
+}
+
+#btn-restart.visible{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.birthday-title{
+
+margin:0;
+
+font-family:var(--font-display);
+
+font-size:clamp(3rem,7vw,5rem);
+
+font-weight:900;
+
+letter-spacing:.22em;
+
+line-height:.9;
+
+text-align:center;
+
+color:#fff;
+
+text-shadow:
+0 0 12px rgba(255,255,255,.7),
+0 0 35px rgba(0,184,255,.5);
+
+}
+
+@keyframes birthdayGlow{
+
+0%,100%{
+
+text-shadow:
+0 0 8px rgba(255,255,255,.5),
+0 0 25px rgba(0,184,255,.5),
+0 0 60px rgba(0,184,255,.25);
+
+}
+
+50%{
+
+text-shadow:
+0 0 12px #fff,
+0 0 40px var(--blue),
+0 0 80px var(--blue);
+
+}
+
+}
+.birthday-hero{
+    
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    width:100%;
+
+    padding-bottom:20px;
+
+}
+
+.birthday-name{
+
+margin-top:15px;
+
+font-family:var(--font-display);
+
+font-size:clamp(2rem,5vw,3.2rem);
+
+font-weight:800;
+
+letter-spacing:.45em;
+
+text-align:center;
+
+color:var(--blue);
+
+text-shadow:0 0 25px var(--blue-glow);
+
+}
+
+#birthday-message{
+
+
+
+padding-right:8px;
+
+margin:0;
+
+white-space:pre-line;
+
+font-family:var(--font-mono);
+
+font-size:.95rem;
+
+line-height:2;
+
+color:#e7f5ff;
+
+text-align:left;
+
+scroll-behavior:smooth;
+
+}

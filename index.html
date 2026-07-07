@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLASSIFIED // OPERATION UNKNOWN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/loading.css">
+<link rel="stylesheet" href="css/identity.css">
+<link rel="stylesheet" href="css/personality.css">
+<link rel="stylesheet" href="css/evidence.css">
+<link rel="stylesheet" href="css/code.css">
+<link rel="stylesheet" href="css/report.css">
+<link rel="stylesheet" href="css/button.css">
+<link rel="stylesheet" href="css/ending.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/cursor.css"
+</head>
+<body>
+
+  <!-- ============================================================
+       CUSTOM CURSOR
+  ============================================================ -->
+  <div id="cursor" class="cursor">
+    <div class="cursor-ring"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-cross cursor-cross--h"></div>
+    <div class="cursor-cross cursor-cross--v"></div>
+  </div>
+  <div id="cursor-particles" class="cursor-particles"></div>
+
+  <!-- ============================================================
+       SECTION 1 — LOADING / BOOT SEQUENCE
+  ============================================================ -->
+  <section id="s-loading" class="section section--active">
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="load-frame">
+      <div class="load-logo">
+        <span class="load-logo__bracket">[</span>
+        <span class="load-logo__text" id="logo-type"></span>
+        <span class="load-logo__cursor">▮</span>
+        <span class="load-logo__bracket">]</span>
+      </div>
+
+      <div class="load-status-list" id="boot-list">
+        <!-- JS injects boot lines here -->
+      </div>
+
+      <div class="load-bar-wrap">
+        <div class="load-bar-track">
+          <div class="load-bar-fill" id="load-bar"></div>
+          <div class="load-bar-glow"></div>
+        </div>
+        <span class="load-pct" id="load-pct">0%</span>
+      </div>
+
+      <div class="load-scanline"></div>
+      <div class="load-corner load-corner--tl"></div>
+      <div class="load-corner load-corner--tr"></div>
+      <div class="load-corner load-corner--bl"></div>
+      <div class="load-corner load-corner--br"></div>
+    </div>
+
+    <div class="load-grid"></div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 2 — IDENTITY REVEAL (CARD + PROFILE)
+  ============================================================ -->
+  <section id="s-identity" class="section">
+    <canvas id="bg-canvas-2" class="section-canvas"></canvas>
+
+    <div class="section-header">
+      <span class="sec-label">MISSION DATABASE //</span>
+      <h2 class="sec-title" data-text="MISSION TARGET IDENTIFIED">PLAYER PROFILE UNLOCKED</h2>
+      <span class="sec-line"></span>
+    </div>
+
+    <div class="identity-boot" id="identity-boot">
+
+    <div class="boot-title">
+        SUBJECT SCAN INITIALIZING
+    </div>
+
+    <div class="boot-progress">
+
+        <div class="boot-progress-fill" id="boot-fill"></div>
+
+    </div>
+
+    <div class="boot-status" id="boot-status">
+
+        Connecting to Database...
+
+    </div>
+
+</div>
+
+    <div class="identity-layout hidden" id="identity-layout">
+
+      <!-- Left: collectible card -->
+      <div class="card-scene" id="card-scene">
+        <div class="card-wrapper" id="card-wrapper">
+
+          <!-- Card Back -->
+          <div class="card card--back">
+            <div class="card-back-pattern">
+              <div class="card-back-icon">?</div>
+              <div class="card-back-text">CLASSIFIED</div>
+            </div>
+            <div class="card-corner card-corner--tl"></div>
+            <div class="card-corner card-corner--tr"></div>
+            <div class="card-corner card-corner--bl"></div>
+            <div class="card-corner card-corner--br"></div>
+            <div class="card-scan-line"></div>
+          </div>
+
+          <!-- Card Front -->
+          <div class="card card--front">
+            <div class="card-holographic"></div>
+            <div class="card-photo-frame">
+              <div class="card-photo-scan"></div>
+              <div class="card-photo-placeholder">
+
+    <img
+        src="assets/images/suyash.jpeg"
+        id="target-photo"
+        class="target-photo"
+    >
+
+    <div class="photo-scan"></div>
+
+</div>
+              <div class="card-photo-corner card-photo-corner--tl"></div>
+              <div class="card-photo-corner card-photo-corner--tr"></div>
+              <div class="card-photo-corner card-photo-corner--bl"></div>
+              <div class="card-photo-corner card-photo-corner--br"></div>
+            </div>
+            <div class="card-front-bottom">
+              <div class="card-codename">
+                <span class="card-codename-label">CODENAME</span>
+                <span class="card-codename-value">SUYASH</span>
+              </div>
+              <div class="card-classification">
+                <div class="card-badge">LEVEL 20 UNLOCKED 🎉</div>
+                <div class="card-badge card-badge--accent">BIRTHDAY MODE</div>
+              </div>
+            </div>
+            <div class="card-corner card-corner--tl"></div>
+            <div class="card-corner card-corner--tr"></div>
+            <div class="card-corner card-corner--bl"></div>
+            <div class="card-corner card-corner--br"></div>
+          </div>
+
+        </div>
+        <div class="card-shadow"></div>
+        <div class="card-particles" id="card-particles"></div>
+      </div>
+
+      <!-- Right: data reveal -->
+      <div class="identity-data" id="identity-data">
+        <div class="id-field-group">
+          <div class="id-field" data-delay="0">
+            <div class="status-led"></div>
+            <span class="id-field__key">DESIGNATION</span>
+            <span class="id-field__sep">//</span>
+            <span class="id-field__val" id="idf-name">Self-Certified Genius</span>
+          </div>
+          <div class="id-field" data-delay="1">
+            <span class="id-field__key">CLASSIFICATION</span>
+            <span class="id-field__sep">//</span>
+            <span class="id-field__val">Species: Self-Proclaimed Genius</span>
+          </div>
+          <div class="id-field" data-delay="2">
+            <span class="id-field__key">AGE AT ACTIVATION</span>
+            <span class="id-field__sep">//</span>
+            <span class="id-field__val">20 YEARS</span>
+          </div>
+          <div class="id-field" data-delay="3">
+            <span class="id-field__key">CLEARANCE LEVEL</span>
+            <span class="id-field__sep">//</span>
+            <span class="id-field__val id-field__val--green">Professional Point Prover</span>
+          </div>
+          <div class="id-field" data-delay="4">
+            <span class="id-field__key">STATUS</span>
+            <span class="id-field__sep">//</span>
+            <span class="id-field__val id-field__val--amber">● Survived Another Year ✔</span>
+          </div>
+          <div class="id-field" data-delay="5">
+            <span class="id-field__key">OPERATION ID</span>
+            <span class="id-field__sep">//</span>
+            <span class="id-field__val">BDAY-1507-2026</span>
+          </div>
+        </div>
+
+        <div class="id-divider"></div>
+
+        <div class="id-quote" id="id-quote">
+          <span class="id-quote__mark">"</span>
+          <span class="id-quote__text">Achievement unlocked: Successfully completed Level 20.</span>
+          <span class="id-quote__mark">"</span>
+        </div>
+
+        <button class="cta-btn cta-btn--blue" id="btn-identity-next" data-sound="click">
+          <span class="cta-btn__icon">▶</span>
+          <span>ACCESS PERSONALITY FILE</span>
+          <div class="cta-btn__glow"></div>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3 — PERSONALITY ANALYSIS
+  ============================================================ -->
+  <section id="s-personality" class="section">
+    <canvas id="bg-canvas-3" class="section-canvas"></canvas>
+
+    <div class="section-header">
+      <span class="sec-label">BEHAVIORAL ANALYSIS //</span>
+      <h2 class="sec-title" data-text="AGENT ATTRIBUTES">AGENT ATTRIBUTES</h2>
+      <span class="sec-line sec-line--purple"></span>
+    </div>
+
+    <div class="personality-grid" id="personality-grid">
+
+      <div class="stat-card" data-color="blue" data-value="94">
+        <div class="stat-card__bg"></div>
+        <div class="stat-card__icon">⬡</div>
+        <div class="stat-card__label">
+LOGICAL THINKING
+</div>
+        <div class="stat-card__bar-wrap">
+          <div class="stat-card__bar-track">
+            <div class="stat-card__bar-fill"></div>
+          </div>
+          <div class="stat-card__bar-glow"></div>
+        </div>
+        <div class="stat-card__value">96</div>
+        <div class="stat-card__rank">STATUS: VERIFIED ✓</div>
+        <div class="stat-card__note">
+Will spend 30 minutes explaining why his solution is better.</div>
+        <div class="stat-card__corner stat-card__corner--tl"></div>
+        <div class="stat-card__corner stat-card__corner--tr"></div>
+        <div class="stat-card__corner stat-card__corner--bl"></div>
+        <div class="stat-card__corner stat-card__corner--br"></div>
+      </div>
+
+      <div class="stat-card" data-color="purple" data-value="98">
+        <div class="stat-card__bg"></div>
+        <div class="stat-card__icon">⬡</div>
+        <div class="stat-card__label">CONFIDENCE</div>
+        <div class="stat-card__bar-wrap">
+          <div class="stat-card__bar-track">
+            <div class="stat-card__bar-fill"></div>
+          </div>
+          <div class="stat-card__bar-glow"></div>
+        </div>
+        <div class="stat-card__value">98</div>
+        <div class="stat-card__rank">STATUS: OVERLOADED</div>
+        <div class="stat-card__note">
+Strong opinions. Even stronger explanations.</div>
+        <div class="stat-card__corner stat-card__corner--tl"></div>
+        <div class="stat-card__corner stat-card__corner--tr"></div>
+        <div class="stat-card__corner stat-card__corner--bl"></div>
+        <div class="stat-card__corner stat-card__corner--br"></div>
+      </div>
+
+      <div class="stat-card" data-color="green" data-value="97">
+        <div class="stat-card__bg"></div>
+        <div class="stat-card__icon">⬡</div>
+        <div class="stat-card__label">CURIOSITY</div>
+        <div class="stat-card__bar-wrap">
+          <div class="stat-card__bar-track">
+            <div class="stat-card__bar-fill"></div>
+          </div>
+          <div class="stat-card__bar-glow"></div>
+        </div>
+        <div class="stat-card__value">97</div>
+        <div class="stat-card__rank">ALWAYS ACTIVE</div>
+        <div class="stat-card__note">
+Every answer unlocks another question.</div>
+        <div class="stat-card__corner stat-card__corner--tl"></div>
+        <div class="stat-card__corner stat-card__corner--tr"></div>
+        <div class="stat-card__corner stat-card__corner--bl"></div>
+        <div class="stat-card__corner stat-card__corner--br"></div>
+      </div>
+
+      <div class="stat-card" data-color="amber" data-value="94">
+        <div class="stat-card__bg"></div>
+        <div class="stat-card__icon">⬡</div>
+        <div class="stat-card__label">CONSISTENCY</div>
+        <div class="stat-card__bar-wrap">
+          <div class="stat-card__bar-track">
+            <div class="stat-card__bar-fill"></div>
+          </div>
+          <div class="stat-card__bar-glow"></div>
+        </div>
+        <div class="stat-card__value">94</div>
+        <div class="stat-card__rank">STATUS: STABLE</div>
+        <div class="stat-card__note">
+Can disappear for weeks. Returns like nothing changed.</div>
+        <div class="stat-card__corner stat-card__corner--tl"></div>
+        <div class="stat-card__corner stat-card__corner--tr"></div>
+        <div class="stat-card__corner stat-card__corner--bl"></div>
+        <div class="stat-card__corner stat-card__corner--br"></div>
+      </div>
+
+      <div class="stat-card" data-color="blue" data-value="93">
+        <div class="stat-card__bg"></div>
+        <div class="stat-card__icon">⬡</div>
+        <div class="stat-card__label">UNDERSTANDING</div>
+        <div class="stat-card__bar-wrap">
+          <div class="stat-card__bar-track">
+            <div class="stat-card__bar-fill"></div>
+          </div>
+          <div class="stat-card__bar-glow"></div>
+        </div>
+        <div class="stat-card__value">93</div>
+        <div class="stat-card__rank">STATUS: OBSERVANT</div>
+        <div class="stat-card__note">
+Sees the point,
+even when he doesn't agree.</div>
+        <div class="stat-card__corner stat-card__corner--tl"></div>
+        <div class="stat-card__corner stat-card__corner--tr"></div>
+        <div class="stat-card__corner stat-card__corner--bl"></div>
+        <div class="stat-card__corner stat-card__corner--br"></div>
+      </div>
+
+      <div class="stat-card" data-color="purple" data-value="100">
+        <div class="stat-card__bg"></div>
+        <div class="stat-card__icon">⬡</div>
+        <div class="stat-card__label">BIRTHDAY MODE</div>
+        <div class="stat-card__bar-wrap">
+          <div class="stat-card__bar-track">
+            <div class="stat-card__bar-fill"></div>
+          </div>
+          <div class="stat-card__bar-glow"></div>
+        </div>
+        <div class="stat-card__value">100</div>
+        <div class="stat-card__rank">STATUS: LIMITED EDITION</div>
+        <div class="stat-card__note">
+Doesn't ask for attention. Still deserves this mission.</div>
+        <div class="stat-card__corner stat-card__corner--tl"></div>
+        <div class="stat-card__corner stat-card__corner--tr"></div>
+        <div class="stat-card__corner stat-card__corner--bl"></div>
+        <div class="stat-card__corner stat-card__corner--br"></div>
+      </div>
+
+    </div>
+
+    <div class="section-footer-btn">
+      <button class="cta-btn cta-btn--purple" id="btn-personality-next" data-sound="click">
+        <span class="cta-btn__icon">▶</span>
+        <span>OPEN ARCHIVE ROOM</span>
+        <div class="cta-btn__glow"></div>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4 — EVIDENCE ROOM
+  ============================================================ -->
+  <section id="s-evidence" class="section">
+
+  <canvas id="bg-canvas-4" class="section-canvas"></canvas>
+
+  <div class="section-header">
+    <span class="sec-label">CLASSIFIED DATABASE //</span>
+    <h2 class="sec-title" data-text="CLASSIFIED ARCHIVES">CLASSIFIED ARCHIVES</h2>
+    <span class="sec-line sec-line--green"></span>
+  </div>
+
+  <div class="archive-container">
+
+    <!-- SECURITY TERMINAL -->
+
+    <div class="archive-access hidden" id="archive-access">
+
+      <div class="archive-terminal">
+
+        <div class="terminal-header">
+          <span>MEMORY RECOVERY SYSTEM</span>
+          <span id="terminal-status">WAITING...</span>
+        </div>
+
+        <div class="terminal-screen">
+
+          <p id="terminal-line1">Initializing...</p>
+          <p id="terminal-line2"></p>
+          <p id="terminal-line3"></p>
+
+          <div class="terminal-progress">
+            <div class="terminal-progress-fill" id="terminal-fill"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- TOP BAR -->
+
+    <div class="archive-top">
+
+      <span>Recovered Files : 07</span>
+
+      <span>Status : CLASSIFIED</span>
+
+    </div>
+
+    <!-- ARCHIVE LIST -->
+
+    <div class="archive-list">
+
+      <div class="archive-folder" data-file="1">
+        <span class="archive-icon">📁</span>
+        <div class="archive-info">
+          <h3>ARCHIVE 01</h3>
+          <p>FIRST IMPRESSION</p>
+        </div>
+        <span class="archive-lock">LOCKED</span>
+      </div>
+
+      <div class="archive-folder" data-file="2">
+        <span class="archive-icon">📁</span>
+        <div class="archive-info">
+          <h3>ARCHIVE 02</h3>
+          <p>OBSERVATION LOG</p>
+        </div>
+        <span class="archive-lock">LOCKED</span>
+      </div>
+
+      <div class="archive-folder" data-file="3">
+        <span class="archive-icon">📁</span>
+        <div class="archive-info">
+          <h3>ARCHIVE 03</h3>
+          <p>DEBATE RECORDS</p>
+        </div>
+        <span class="archive-lock">LOCKED</span>
+      </div>
+
+      <div class="archive-folder" data-file="4">
+        <span class="archive-icon">📁</span>
+        <div class="archive-info">
+          <h3>ARCHIVE 04</h3>
+          <p>STRENGTH ANALYSIS</p>
+        </div>
+        <span class="archive-lock">LOCKED</span>
+      </div>
+
+      
+      <div class="archive-folder archive-folder-final" data-file="5">
+        <span class="archive-icon">🗂</span>
+        <div class="archive-info">
+          <h3>FINAL REPORT</h3>
+          <p>TOP SECRET</p>
+        </div>
+        <span class="archive-lock red">LOCKED</span>
+      </div>
+
+    </div>
+
+    <!-- ARCHIVE VIEW -->
+
+    <div class="archive-view hidden" id="archive-view">
+
+      <div class="archive-window">
+
+        <div class="archive-window-top">
+
+          <span id="archive-title">ARCHIVE</span>
+
+          <button id="archive-close">✕</button>
+
+        </div>
+
+        <div class="archive-body">
+
+          <pre id="archive-text"></pre>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- NEXT BUTTON -->
+
+  <div class="section-footer-btn">
+
+    <button
+      class="cta-btn cta-btn--green"
+      id="btn-evidence-next"
+      data-sound="click">
+
+      <span class="cta-btn__icon">▶</span>
+      <span>ACCESS CHALLENGE</span>
+
+      <div class="cta-btn__glow"></div>
+
+    </button>
+
+  </div>
+
+</section>
+
+  <!-- ============================================================
+       SECTION 5 — GUESS THE OUTPUT (CODING CHALLENGE)
+  ============================================================ -->
+  <section id="s-code" class="section">
+
+    <canvas id="bg-canvas-5" class="section-canvas"></canvas>
+
+    <div class="section-header">
+        <span class="sec-label">SECURITY PROTOCOL //</span>
+
+        <h2 class="sec-title" data-text="IDENTITY VERIFICATION">
+            IDENTITY VERIFICATION
+        </h2>
+
+        <span class="sec-line"></span>
+    </div>
+
+    <div class="code-box">
+
+        <div class="code-mission">
+            FINAL SECURITY CHECK
+        </div>
+
+        <h3 class="code-question">
+            Who is more intelligent?
+        </h3>
+
+        <div class="code-options">
+
+            <button class="code-option" data-answer="sakshi">
+                Sakshi 🤔
+            </button>
+
+            <button class="code-option">
+                Suyash 😌
+            </button>
+
+            <button class="code-option">
+                Obviously Suyash 😏
+            </button>
+
+            <button class="code-option">
+                Without any doubt, Suyash. 😄
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Verification Popup -->
+<div class="verify-popup hidden" id="verify-popup">
+
+    <div class="verify-card">
+
+        <div class="verify-header">
+
+            <span>SECURITY RESPONSE</span>
+
+            <button id="verify-popup-close">✕</button>
+
+        </div>
+
+        <div class="verify-content">
+
+            <pre id="verify-text"></pre>
+
+        </div>
+
+        <div class="verify-footer">
+
+            <button id="btn-final-report" class="verify-btn">
+
+                ▶ OPEN FINAL REPORT
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+    
+</section>
+  <!-- ============================================================
+       SECTION 6 — MISSION REPORT
+  ============================================================ -->
+  <section id="s-report" class="section">
+    <canvas id="bg-canvas-7" class="section-canvas"></canvas>
+
+    <div class="report-wrap">
+      <div class="report-paper">
+
+        <div class="report-header">
+
+    <h2 class="report-title">MISSION REPORT</h2>
+
+    <div class="report-org">
+        OPERATION-1507
+    </div>
+
+    <div class="report-id">
+        FINAL ASSESSMENT
+    </div>
+
+    <div class="report-divider"></div>
+
+</div>
+</div>
+
+        <div class="report-body" id="report-body">
+
+          <div class="report-field" data-reveal="0">
+            <span class="report-field__key">SUBJECT</span>
+            <span class="report-field__dots">..............................</span>
+            <span class="report-field__val">SUYASH</span>
+          </div>
+
+          <div class="report-field" data-reveal="1">
+            <span class="report-field__key">MISSION DURATION</span>
+            <span class="report-field__dots">...............</span>
+            <span class="report-field__val">21 YEARS — ONGOING</span>
+          </div>
+
+          <div class="report-field" data-reveal="2">
+            <span class="report-field__key">PRIMARY OBJECTIVE</span>
+            <span class="report-field__dots">...............</span>
+            <span class="report-field__val">TO KEEP MOVING FORWARD,<br>
+              NO MATTER HOW DIFFICULT THE MISSION GETS.</span>
+          </div>
+
+          <div class="report-field" data-reveal="3">
+            <span class="report-field__key">THREAT ASSESSMENT</span>
+            <span class="report-field__dots">...............</span>
+            <span class="report-field__val report-field__val--green">NON-HOSTILE — FRIENDLY</span>
+          </div>
+
+          <div class="report-field" data-reveal="4">
+            <span class="report-field__key">NOTABLE TRAITS</span>
+            <span class="report-field__dots">.................</span>
+            <span class="report-field__val">• PATIENT<br>
+              • LOGIC DRIVEN<br>
+              • QUIETLY COMPETITIVE<br>
+              • CONFIDENT<br>
+              • DANGEROUSLY GOOD AT EXPLAINING THINGS 😏
+            </span>
+          </div>
+
+          <div class="report-divider report-divider--sm"></div>
+          <div class="report-section-title" data-reveal="5">
+            OBSERVATIONS
+         </div>
+          <div class="report-para" data-reveal="6">
+          This mission confirmed one thing...<br><br>
+
+You somehow explain even the most confusing
+things without making the other person
+feel stupid. 🤍<br><br>
+
+Which is honestly impressive...
+considering how much you enjoy
+calling me "gadhi." 😒<br><br>
+
+Behind all that confidence (and tiny bit of ego 😏),
+you're patient, dependable,
+and genuinely good to have around.<br><br>
+
+Mission logs confirm...
+that's probably your best quality. 🤍
+          <div class="report-divider report-divider--sm"></div>
+
+          <div class="report-section-title" data-reveal="7">FINAL REMARKS</div>
+          <div class="report-para report-final" data-reveal="8">
+
+            After reviewing all available evidence... 📁<br><br>
+
+One conclusion is unavoidable.<br><br>
+
+You're still confident. 😌<br><br>
+
+You'll still believe you're smarter than me. 😏<br><br>
+
+And you'll definitely keep
+calling me "gadhi." 😒<br><br>
+
+...which, honestly,
+I don't expect to change. 😂<br><br>
+
+Turns out...<br><br>
+
+this mission was actually worth it. ✨🤍<br><br>
+
+Mission Completed. ✅
+
+          </div>
+          <div class="report-signature" data-reveal="9">
+            <div class="report-sig-line"></div>
+
+             <div class="report-sig-name">
+
+              Prepared with unnecessary dedication.
+
+              </div>
+
+              <div class="report-sig-stamp">
+
+               — Sakshi
+
+              </div>
+           </div>
+
+      </div>
+
+        <div class="report-scanline"></div>
+        <div class="report-corner report-corner--tl"></div>
+        <div class="report-corner report-corner--tr"></div>
+        <div class="report-corner report-corner--bl"></div>
+        <div class="report-corner report-corner--br"></div>
+
+      </div>
+    </div>
+
+    <div class="section-footer-btn">
+      <button class="cta-btn cta-btn--blue" id="btn-report-next" data-sound="click">
+        <span class="cta-btn__icon">▶</span>
+        <span>PROCEED TO FINAL DIRECTIVE</span>
+        <div class="cta-btn__glow"></div>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 8 — THE BUTTON
+  ============================================================ -->
+  <section id="s-button" class="section">
+    <canvas id="bg-canvas-8" class="section-canvas"></canvas>
+
+    <div class="danger-zone">
+      <div class="danger-label danger-label--top">
+        <span>⚠ WARNING — AUTHORIZED PERSONNEL ONLY ⚠</span>
+      </div>
+
+      <div class="danger-orbit" id="danger-orbit">
+        <div class="orbit-ring orbit-ring--1"></div>
+        <div class="orbit-ring orbit-ring--2"></div>
+        <div class="orbit-ring orbit-ring--3"></div>
+
+        <button class="danger-btn" id="danger-btn" data-sound="danger">
+          <div class="danger-btn__bg"></div>
+          <div class="danger-btn__text">DON'T<br>CLICK</div>
+          <div class="danger-btn__ripple" id="danger-ripple"></div>
+          <div class="danger-btn__glow"></div>
+        </button>
+      </div>
+
+      <div class="danger-warning-text" id="danger-warning-text">
+        <span class="danger-blink">▮</span>
+        <span id="danger-hint-text">This button does absolutely nothing. Probably.</span>
+        <span class="danger-blink">▮</span>
+      </div>
+
+      <div class="danger-label danger-label--bottom">
+        <span>CLASSIFIED DIRECTIVE — DO NOT ENGAGE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 9 — ENDING
+  ============================================================ -->
+  <section id="s-ending" class="section">
+    <div class="ending-wrap" id="ending-wrap">
+
+      <div class="glitch-overlay" id="glitch-overlay"></div>
+
+      <canvas id="ending-particles-canvas" class="ending-particles-canvas"></canvas>
+
+      <div class="ending-content" id="ending-content">
+
+    <div class="birthday-hero">
+
+        <h1 class="birthday-title">
+            HAPPY
+            BIRTHDAY
+        </h1>
+
+        <h2 class="birthday-name">
+            SUYASH
+        </h2>
+
+    </div>
+
+    <div class="ending-divider"></div>
+
+    <div class="birthday-card">
+
+        <pre id="birthday-message"></pre>
+
+    </div>
+
+    <div class="birthday-sign">
+
+        — Sakshi 🤍
+
+    </div>
+
+    <button
+        class="cta-btn cta-btn--blue ending-restart"
+        id="btn-restart"
+        data-sound="click">
+
+        <span class="cta-btn__icon">↺</span>
+
+        <span>REPLAY OPERATION</span>
+
+        <div class="cta-btn__glow"></div>
+
+    </button>
+
+</div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       NAV DOTS
+  ============================================================ -->
+  <nav class="nav-dots" id="nav-dots">
+    <button class="nav-dot nav-dot--active" data-section="s-identity" title="Identity"></button>
+    <button class="nav-dot" data-section="s-personality" title="Personality"></button>
+    <button class="nav-dot" data-section="s-evidence" title="Evidence"></button>
+    <button class="nav-dot" data-section="s-code" title="Code Challenge"></button>
+    <button class="nav-dot" data-section="s-report" title="Report"></button>
+    <button class="nav-dot" data-section="s-button" title="Final Button"></button>
+  </nav>
+
+  <!-- ============================================================
+       TRANSITION OVERLAY
+  ============================================================ -->
+  <div id="transition-overlay" class="transition-overlay">
+    <div class="transition-overlay__scanlines"></div>
+    <div class="transition-overlay__text" id="transition-text">ACCESSING...</div>
+  </div>
+
+  <!-- SOUND PLACEHOLDER -->
+  <div id="sound-system" aria-hidden="true" style="display:none">
+    <!-- Sounds would be loaded here -->
+    <!-- <audio id="snd-click" src="sounds/click.mp3"></audio> -->
+    <!-- <audio id="snd-flip" src="sounds/flip.mp3"></audio> -->
+    <!-- <audio id="snd-unlock" src="sounds/unlock.mp3"></audio> -->
+    <!-- <audio id="snd-terminal" src="sounds/typing.mp3"></audio> -->
+    <!-- <audio id="snd-danger" src="sounds/danger.mp3"></audio> -->
+    <!-- <audio id="snd-achievement" src="sounds/achievement.mp3"></audio> -->
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/loading.js"></script>
+  <script src="js/identity.js"></script>
+  <script src="js/personality.js"></script>
+  <script src="js/evidence.js"></script>
+  <script src="js/code.js"></script>
+  <script src="js/report.js"></script>
+  <script src="js/button.js"></script>
+  <script src="js/ending.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+:root {
+  /* Base */
+  --bg-base:     #050816;
+--bg-surface:  #0B1020;
+--bg-elevated: #111827;
+--bg-glass:    rgba(8,16,32,.72);
+
+  /* Accents */
+  --blue:        #00E5FF;
+--blue-dim:    rgba(0,229,255,.15);
+--blue-glow:   rgba(0,229,255,.45);
+
+--purple:      #8B5CF6;
+--purple-dim:  rgba(139,92,246,.15);
+--purple-glow: rgba(139,92,246,.45);
+
+--green:       #00F5A0;
+--green-dim:   rgba(0,245,160,.15);
+--green-glow:  rgba(0,245,160,.45);
+
+--amber:       #FFB800;
+--amber-dim:   rgba(255,184,0,.15);
+--amber-glow:  rgba(255,184,0,.45);
+
+--red:       #FF4D6D;
+--red-glow:  rgba(255,77,109,.45);
+
+  --white:     #F8FAFC;
+--muted:     #64748B;
+--muted-lt:  #CBD5E1;
+
+  /* Typography */
+  --font-display:  'Orbitron', sans-serif;
+  --font-mono:     'Share Tech Mono', monospace;
+  --font-ui:       'Rajdhani', sans-serif;
+
+  /* Spacing */
+  --section-pad:   3.5rem;
+
+  /* Transitions */
+  --t-fast:        0.15s;
+  --t-med:         0.3s;
+  --t-slow:        0.6s;
+}
+
+/* ── Reset & Base ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+ background:
+radial-gradient(circle at top,#16264a 0%,#050816 45%,#02040a 100%);
+  color: var(--white);
+  font-family: var(--font-ui);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  cursor: none;
+  user-select: none;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+
+background:
+radial-gradient(circle at 15% 20%,rgba(0,229,255,.12),transparent 28%),
+radial-gradient(circle at 80% 75%,rgba(139,92,246,.10),transparent 35%),
+radial-gradient(circle at 50% 100%,rgba(0,245,160,.08),transparent 30%);
+
+pointer-events:none;
+z-index:-2;
+}
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+background-image:
+
+linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+
+linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+
+background-size:50px 50px;
+
+opacity:.18;
+
+pointer-events:none;
+
+animation:gridMove 20s linear infinite;
+
+z-index:-1;
+
+}
+
+@keyframes gridMove{
+
+from{
+
+transform:translateY(0);
+
+}
+
+to{
+
+transform:translateY(50px);
+
+}
+
+}
