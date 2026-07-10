@@ -5,22 +5,55 @@ const HINT_TEXTS = [
   'Last warning.',
   '...Are you sure?',
 ];
+
 let hintIdx = 0;
 
+// ==========================
+// CLICK SOUND
+// ==========================
+
+const clickAudio = new Audio("./assets/sound/click.mp3");
+clickAudio.preload = "auto";
+clickAudio.volume = 0.5;
+
+clickAudio.load();
+
+function playClickSound() {
+  clickAudio.pause();
+
+    clickAudio.currentTime = 0;
+
+    clickAudio.play().catch(() => {});
+}
+
+// Play sound for every button
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+
+  if (!btn) return;
+
+  playClickSound();
+});
+
 function enterButton() {
+
   const dangerBtn = $('#danger-btn');
   const hintText  = $('#danger-hint-text');
   const ripple    = $('#danger-ripple');
 
   dangerBtn?.addEventListener('mouseover', () => {
+
     hintText.textContent = HINT_TEXTS[hintIdx % HINT_TEXTS.length];
     hintIdx++;
-    // Add ripple
+
     const wave = document.createElement('div');
     wave.className = 'ripple-wave';
     ripple.appendChild(wave);
+
     setTimeout(() => wave.remove(), 800);
+
   });
 
   dangerBtn?.addEventListener('click', triggerEnding);
+
 }

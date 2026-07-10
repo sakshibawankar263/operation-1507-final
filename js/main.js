@@ -20,63 +20,192 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 /* ================================================================
    CURSOR
 ================================================================ */
-const cursor      = $('#cursor');
+const cursor = $('#cursor');
 const cursorParts = $('#cursor-particles');
+
 let lastX = 0, lastY = 0;
 
+// ===========================
+// DESKTOP CURSOR
+// ===========================
 document.addEventListener('mousemove', (e) => {
-  STATE.mx = e.clientX;
-  STATE.my = e.clientY;
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top  = e.clientY + 'px';
-
-  // Trail particles
-  const dx = e.clientX - lastX, dy = e.clientY - lastY;
-  if (Math.abs(dx) + Math.abs(dy) > 6) {
-    spawnCursorParticle(e.clientX, e.clientY);
-    lastX = e.clientX; lastY = e.clientY;
-  }
+    moveCursor(e.clientX, e.clientY);
 });
 
+// ===========================
+// MOBILE CURSOR
+// ===========================
+
+// Finger touches screen
+document.addEventListener('touchstart', (e) => {
+
+    const touch = e.touches[0];
+
+    moveCursor(touch.clientX, touch.clientY);
+
+}, { passive: true });
+
+// Finger moves on screen (including scrolling)
+document.addEventListener('touchmove', (e) => {
+
+    const touch = e.touches[0];
+
+    moveCursor(touch.clientX, touch.clientY);
+
+}, { passive: true });
+
+// Optional: hide cursor after finger leaves screen
+document.addEventListener('touchend', () => {
+
+    cursor.style.opacity = "0";
+
+});
+
+// Show again whenever moving
+function moveCursor(x, y) {
+
+    cursor.style.opacity = "1";
+
+    STATE.mx = x;
+    STATE.my = y;
+
+    cursor.style.left = x + "px";
+    cursor.style.top = y + "px";
+
+    const dx = x - lastX;
+    const dy = y - lastY;
+
+    if (Math.abs(dx) + Math.abs(dy) > 6) {
+
+        spawnCursorParticle(x, y);
+
+        lastX = x;
+        lastY = y;
+
+    }
+
+}
+
+// ===========================
+// CLICK EFFECT
+// ===========================
 document.addEventListener('click', (e) => {
-  for (let i = 0; i < 6; i++) spawnCursorParticle(e.clientX, e.clientY, true);
-  createClickRipple(e.clientX, e.clientY);
+
+    for (let i = 0; i < 6; i++) {
+        spawnCursorParticle(e.clientX, e.clientY, true);
+    }
+
+    createClickRipple(e.clientX, e.clientY);
+
 });
 
+// Mobile tap ripple
+document.addEventListener('touchstart', (e) => {
+
+    const touch = e.touches[0];
+
+    for (let i = 0; i < 6; i++) {
+        spawnCursorParticle(touch.clientX, touch.clientY, true);
+    }
+
+    createClickRipple(touch.clientX, touch.clientY);
+
+}, { passive: true });
+
+// ===========================
+// PARTICLES
+// ===========================
 function spawnCursorParticle(x, y, burst = false) {
-  const p = document.createElement('div');
-  p.className = 'cursor-particle';
-  const tx = (Math.random() - 0.5) * (burst ? 50 : 20);
-  const ty = (Math.random() - 0.5) * (burst ? 50 : 20);
-  p.style.cssText = `left:${x}px;top:${y}px;--tx:${tx}px;--ty:${ty}px`;
-  cursorParts.appendChild(p);
-  setTimeout(() => p.remove(), 600);
+
+    const p = document.createElement('div');
+
+    p.className = 'cursor-particle';
+
+    const tx = (Math.random() - 0.5) * (burst ? 50 : 20);
+    const ty = (Math.random() - 0.5) * (burst ? 50 : 20);
+
+    p.style.cssText = `
+        left:${x}px;
+        top:${y}px;
+        --tx:${tx}px;
+        --ty:${ty}px
+    `;
+
+    cursorParts.appendChild(p);
+
+    setTimeout(() => p.remove(), 600);
+
 }
 
+// ===========================
+// RIPPLE
+// ===========================
 function createClickRipple(x, y) {
-  const r = document.createElement('div');
-  r.style.cssText = `position:fixed;left:${x}px;top:${y}px;width:0;height:0;
-    border-radius:50%;border:2px solid rgba(0,184,255,0.6);
-    transform:translate(-50%,-50%);pointer-events:none;z-index:9997;
-    animation:click-ripple 0.5s ease-out forwards`;
-  document.body.appendChild(r);
-  if (!document.getElementById('click-ripple-style')) {
-    const s = document.createElement('style');
-    s.id = 'click-ripple-style';
-    s.textContent = '@keyframes click-ripple{to{width:60px;height:60px;opacity:0}}';
-    document.head.appendChild(s);
-  }
-  setTimeout(() => r.remove(), 500);
+
+    const r = document.createElement('div');
+
+    r.style.cssText = `
+        position:fixed;
+        left:${x}px;
+        top:${y}px;
+        width:0;
+        height:0;
+        border-radius:50%;
+        border:2px solid rgba(0,184,255,0.6);
+        transform:translate(-50%,-50%);
+        pointer-events:none;
+        z-index:9997;
+        animation:click-ripple .5s ease-out forwards;
+    `;
+
+    document.body.appendChild(r);
+
+    if (!document.getElementById("click-ripple-style")) {
+
+        const s = document.createElement("style");
+
+        s.id = "click-ripple-style";
+
+        s.textContent =
+            "@keyframes click-ripple{to{width:60px;height:60px;opacity:0}}";
+
+        document.head.appendChild(s);
+
+    }
+
+    setTimeout(() => r.remove(), 500);
+
 }
 
-// Hover state
+// ===========================
+// HOVER
+// ===========================
 document.addEventListener('mouseover', (e) => {
-  if (e.target.matches('button, .ev-card, .answer-card, .term-sugg, .nav-dot, .card-wrapper'))
-    document.body.classList.add('cursor-hover');
+
+    if (
+        e.target.matches(
+            'button,.ev-card,.answer-card,.term-sugg,.nav-dot,.card-wrapper'
+        )
+    ) {
+
+        document.body.classList.add('cursor-hover');
+
+    }
+
 });
+
 document.addEventListener('mouseout', (e) => {
-  if (e.target.matches('button, .ev-card, .answer-card, .term-sugg, .nav-dot, .card-wrapper'))
-    document.body.classList.remove('cursor-hover');
+
+    if (
+        e.target.matches(
+            'button,.ev-card,.answer-card,.term-sugg,.nav-dot,.card-wrapper'
+        )
+    ) {
+
+        document.body.classList.remove('cursor-hover');
+
+    }
+
 });
 
 /* ================================================================
