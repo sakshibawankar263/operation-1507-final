@@ -1,6 +1,17 @@
 /*==================================
 IDENTITY VERIFICATION
 ==================================*/
+// ==========================
+// CODE SECTION SOUNDS
+// ==========================
+
+const winnerAudio = new Audio("./assets/sound/winner.mp3");
+winnerAudio.preload = "auto";
+winnerAudio.volume = 0.7;
+
+const loserAudio = new Audio("./assets/sound/looser.mp3");
+loserAudio.preload = "auto";
+loserAudio.volume = 0.7;
 
 const codeOptions = document.querySelectorAll(".code-option");
 const verifyPopup = document.getElementById("verify-popup");
@@ -28,6 +39,8 @@ codeOptions.forEach(option => {
         if (option.textContent.includes("Sakshi")) {
 
             option.classList.add("wrong");
+            loserAudio.currentTime = 0;
+            loserAudio.play().catch(() => {});
 
             message =
 `❌ ACCESS DENIED
@@ -43,6 +56,8 @@ Mission Failed 😂`;
         } else {
 
             option.classList.add("selected");
+            winnerAudio.currentTime = 0;
+            winnerAudio.play().catch(()=>{});
 
             message =
 `😂 I knew it!

@@ -1,3 +1,12 @@
+// ==========================
+// ARCHIVE SOUND
+// ==========================
+
+const archiveAudio = new Audio("./assets/sound/archive.mp3");
+
+archiveAudio.preload = "auto";
+archiveAudio.volume = 0.8;
+
 function enterEvidence() {
 
     if (STATE.evidenceAnimated) {
@@ -42,6 +51,14 @@ const folders = document.querySelectorAll(".archive-folder");
 folders.forEach(folder => {
 
     folder.addEventListener("click", () => {
+
+       archiveAudio.currentTime = 0.57;   // Start from 0.57 seconds
+archiveAudio.play().catch(() => {});
+
+setTimeout(() => {
+    archiveAudio.pause();
+    archiveAudio.currentTime = 0;
+}, 400); // Stop after 400 ms (adjust if needed)
 
         startArchiveAccess(folder.dataset.file);
 
@@ -97,11 +114,12 @@ function startArchiveAccess(id){
 
             setTimeout(() => {
 
-                access.classList.add("hidden");
+    access.classList.add("hidden");
 
-                openArchive(id);
+    
+    openArchive(id);
 
-            }, 900);
+}, 900);
 
         }
 
@@ -219,10 +237,28 @@ Mr. Know-It-All. 🎂
 let archiveTyping = null;
 
 function openArchive(id){
+    // Change LOCKED → UNLOCKED
+const folder = document.querySelector(`.archive-folder[data-file="${id}"]`);
+
+if (folder) {
+
+    const lock = folder.querySelector(".archive-lock");
+
+    if (lock) {
+
+        lock.textContent = "UNLOCKED";
+        lock.classList.remove("red");
+        lock.classList.add("archive-unlocked");
+
+    }
+
+}
     const body = document.querySelector(".archive-body");
     const view = document.getElementById("archive-view");
     const title = document.getElementById("archive-title");
     const text = document.getElementById("archive-text");
+
+    // Change folder status to UNLOCKED
 
     view.classList.remove("hidden");
 

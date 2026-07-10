@@ -1,3 +1,7 @@
+const warningAudio = new Audio("./assets/sound/warning.mp3");
+warningAudio.preload = "auto";
+warningAudio.volume = 1;
+
 const HINT_TEXTS = [
   'This button does absolutely nothing. Probably.',
   'Seriously. Don\'t.',
@@ -54,6 +58,24 @@ function enterButton() {
 
   });
 
-  dangerBtn?.addEventListener('click', triggerEnding);
+dangerBtn?.addEventListener("click", () => {
 
+    // Prevent multiple clicks
+    dangerBtn.disabled = true;
+    dangerBtn.style.pointerEvents = "none";
+
+    // Play warning
+    warningAudio.currentTime = 0;
+    warningAudio.play().catch(() => {});
+
+    // Stop warning after 1.90 seconds
+    setTimeout(() => {
+        warningAudio.pause();
+        warningAudio.currentTime = 0;
+    }, 1900);
+
+    // Continue with ending immediately
+    triggerEnding();
+
+});
 }

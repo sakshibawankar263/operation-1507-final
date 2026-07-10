@@ -140,40 +140,45 @@ fireworksAudio.play().catch(err => console.log(err));
 /*==================================
 TYPEWRITER
 ==================================*/
+let typeTimer = null;
+function typeWrite(el, text, speed, callback) {
 
-function typeWrite(el, text, speed, callback){
+    if (typeTimer) {
+        clearInterval(typeTimer);
+    }
 
     let i = 0;
 
     el.textContent = "";
 
-    const timer = setInterval(() => {
+    typeTimer = setInterval(() => {
 
         el.textContent += text.charAt(i);
 
-        // keep page moving downward while typing
         window.scrollTo({
-
             top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
 
-            behavior:"smooth"
-
+        el.scrollIntoView({
+            behavior: "smooth",
+            block: "end"
         });
 
         i++;
 
-        if(i >= text.length){
+        if (i >= text.length) {
 
-            clearInterval(timer);
+            clearInterval(typeTimer);
+            typeTimer = null;
 
-            if(callback) callback();
+            if (callback) callback();
 
         }
 
-    },speed);
+    }, speed);
 
 }
-
 
 
 /*==================================
