@@ -73,19 +73,19 @@ Click below to open the Final Report.`;
 
         verifyPopup.classList.remove("hidden");
         verifyText.textContent = "";
-
+        const chars = [...message];
         let i = 0;
 
         const typing = setInterval(() => {
 
-            verifyText.textContent += message.charAt(i);
+            verifyText.textContent += chars[i];
 
             verifyText.parentElement.scrollTop =
                 verifyText.parentElement.scrollHeight;
 
             i++;
 
-            if (i >= message.length) {
+            if (i >= chars.length) {
 
                 clearInterval(typing);
 
@@ -121,3 +121,29 @@ verifyPopup.classList.add("hidden");
 showSection("s-report","ACCESS GRANTED");
 
 });
+
+function enterCode() {
+    // Prevent running twice if needed
+    if (STATE.codeCompiled) return;
+
+    STATE.codeCompiled = true;
+
+    const options = document.querySelectorAll(".code-option");
+
+    options.forEach((option, index) => {
+
+        option.style.opacity = "0";
+        option.style.transform = "translateY(20px)";
+
+        setTimeout(() => {
+
+            option.style.transition = "all .4s ease";
+
+            option.style.opacity = "1";
+            option.style.transform = "translateY(0)";
+
+        }, index * 120);
+
+    });
+
+}

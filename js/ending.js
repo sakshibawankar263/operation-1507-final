@@ -53,10 +53,7 @@ function triggerEnding() {
         }
 
     }, 80);
-
 }
-
-
 
 function loadEndingSection() {
 
